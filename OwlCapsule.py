@@ -4,7 +4,7 @@ import Location
 def isEvent(seed):
     rand = CSRandomLite(seed)
     if rand.Sample() < 0.01:
-        return 0
+        return 2
     if rand.Sample() < 0.01:
         return 0
     if rand.Sample() < 0.01:
@@ -12,7 +12,7 @@ def isEvent(seed):
     if rand.Sample() < 0.01:
         return 1
     if rand.Sample() < 0.01:
-        return 2
+        return 0
     return 0
 
 def checkTiles(seed,farm):
@@ -43,7 +43,7 @@ def checkTiles(seed,farm):
 
 def findTileSeeds():
     farm = Location.createFarm()
-    day = 2;
+    day = 6;
     for seed in range(0,2147483648,2):
         if isEvent(seed/2+day) != 2:
             continue
