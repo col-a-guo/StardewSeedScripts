@@ -194,15 +194,21 @@ def writeAllSeedsToFile():
         file.write(format(seed,'b')+format(":",'b')+ format(getTravelingMerchantStock_1_4(seed)+format(",\n",'b'),'b'))
 
 
-
 if __name__ == '__main__':
     #findBundleSeed()
     #writeAllSeedsToFile();
-    seed = 329267225
-    days = [166,168,173,175,180,182,187,189]
-    found = False
+    for seed in range(1, 1200000, 7):    
+        days = [5, 7, 12, 14]
+        found = False
 
-    for day in days:
-        stock = getTravelingMerchantStock(seed,day,"1.5")
-        for item in stock.items():
-            print( SeedUtility.getItemFromIndex(item[0]))
+        for day in days:
+            stock = getTravelingMerchantStock(seed,day,"1.5")
+            for item in stock.items():
+                if SeedUtility.getItemFromIndex(item[0]) == "Ancient Seeds":
+                    if item[1][1] > 1 and item[1][0] < 150:
+                        for new_day in range(day, 16):
+                            if OwlCapsule.isEvent(seed/2+new_day) == 2:
+                                print("seed: "+str(seed))
+                                print("day: "+str(day))
+                                print("fairy day: "+str(new_day))
+                                print("amount: "+str(item[1]))
